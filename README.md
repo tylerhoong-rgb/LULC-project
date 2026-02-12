@@ -25,7 +25,7 @@ LULC/
 ## Setup Instructions
 
 ### 1. Activate Virtual Environment
-I have already created a virtual environment (`venv`) for you. Activate it using:
+Activate it using:
 
 ```bash
 source venv/bin/activate
@@ -59,6 +59,3 @@ python main.py --train --classify /path/to/your/image.tif
 XGBoost is included but optional to avoid dependency issues on macOS. To use it:
 1. Install OpenMP: `brew install libomp`
 2. Update `main.py` or your training logic to call `model_utils.train_xgb`.
-
----
-*Created by Antigravity*
