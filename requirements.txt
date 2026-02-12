@@ -1,0 +1,14 @@
+earthengine-api
+geemap
+pandas
+scikit-learn
+xgboost
+rasterio
+numpy
+matplotlib
+joblib
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+gcsfs
+fsspec

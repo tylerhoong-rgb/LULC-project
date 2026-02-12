@@ -1,0 +1,18 @@
+# Environment
+venv/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Data and Models (Large files)
+trained_models/*.pkl
+outputs/*.tif
+testimages/*.tif
+data/
+
+# OS
+.DS_Store
