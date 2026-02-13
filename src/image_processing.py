@@ -2,6 +2,8 @@ import rasterio
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import pandas as pd
+from . import config
 
 def load_geotiff(file_path):
     """
@@ -15,6 +17,7 @@ def load_geotiff(file_path):
 def preprocess_image(img):
     """
     Prepare GeoTIFF image for prediction.
+    Returns a pandas DataFrame to maintain feature names.
     """
     if img.shape[0] != 4:
          print(f"Warning: Expected 4 bands, but got {img.shape[0]} bands.")
@@ -23,7 +26,10 @@ def preprocess_image(img):
     h, w = img.shape[1], img.shape[2]
     img_reshaped = img.transpose(1, 2, 0).reshape(-1, 4)
     img_reshaped = np.nan_to_num(img_reshaped, nan=0.0, posinf=0.0, neginf=0.0)
-    return img_reshaped, h, w
+    
+    # Convert to DataFrame with consistent band names
+    df = pd.DataFrame(img_reshaped, columns=config.BANDS)
+    return df, h, w
 
 def calculate_ndvi(img):
     """

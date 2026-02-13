@@ -17,17 +17,16 @@ def run_pipeline(train=False, classify_image=None):
         X_train, y_train = data_loader.get_features_labels(df_train)
         trained_model = model_utils.train_rf(X_train, y_train)
         
-        # Save model
-        model_save_path = os.path.join(config.MODELS_DIR, "landcover_rf_model.pkl")
-        os.makedirs(config.MODELS_DIR, exist_ok=True)
-        model_utils.save_rf(trained_model, model_save_path)
+        # Save model with automatic versioning
+        model_save_path = model_utils.save_rf(trained_model)
+        print(f"Model saved as versioned file: {model_save_path}")
     
     # 3. Classify image if requested
     if classify_image:
         if not trained_model:
-            # Attempt to load existing model
-            model_path = os.path.join(config.MODELS_DIR, "landcover_rf_model.pkl")
-            if os.path.exists(model_path):
+            # Attempt to load latest existing model
+            model_path = model_utils.get_latest_model_path("rf")
+            if model_path and os.path.exists(model_path):
                 trained_model = model_utils.load_rf(model_path)
             else:
                 print("Error: No trained model found and 'train' flag not set.")
