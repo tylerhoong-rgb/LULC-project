@@ -39,23 +39,43 @@ Open `src/config.py` to update your Google Cloud Project ID, Bucket Name, or mod
 You can run the entire pipeline through `main.py`.
 
 ### Train the Model
-This will load data from GCS, train a Random Forest model, and save it to `trained_models/`.
+This will load data from GCS, train a model, and save it to `trained_models/`.
 ```bash
+# Default is Random Forest
 python main.py --train
+
+# Specify model type
+python main.py --train --model xgb
 ```
 
 ### Classify a New Image
-This will load a GeoTIFF, use the trained model, and save a prediction map to `outputs/`.
+This will load a GeoTIFF, use the specified model version, and save a prediction map to `outputs/`.
 ```bash
+# Default uses latest Random Forest
 python main.py --classify /path/to/your/image.tif
+
+# Specify model type (uses latest of that type)
+python main.py --classify /path/to/your/image.tif --model xgb
+
+# Specify a specific model file path
+python main.py --classify /path/to/your/image.tif --model_path trained_models/landcover_rf_model_v1.pkl
+
+# Save a colorized visualization (PNG) for quick viewing
+python main.py --classify /path/to/your/image.tif --visualize
 ```
+
+> [!TIP]
+> The raw `.tif` outputs in `outputs/` may appear black in standard viewers because they contain raw class indices. Use the `--visualize` flag to generate a colorized `.png` version, or open the `.tif` in a GIS tool like QGIS.
 
 ### Run Both
 ```bash
-python main.py --train --classify /path/to/your/image.tif
+python main.py --train --classify /path/to/your/image.tif --model xgb --visualize
 ```
 
 ## Optional: Enable XGBoost
 XGBoost is included but optional to avoid dependency issues on macOS. To use it:
 1. Install OpenMP: `brew install libomp`
-2. Update `main.py` or your training logic to call `model_utils.train_xgb`.
+2. Run with the `--model xgb` flag.
+
+---
+*Created by Antigravity*

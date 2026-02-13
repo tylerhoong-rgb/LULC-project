@@ -59,6 +59,18 @@ def save_prediction_geotiff(prediction_map, profile, output_path):
         dst.write(prediction_map.astype(np.int32), 1)
     print(f"Prediction saved to: {output_path}")
 
+def save_prediction_visual(prediction_map, output_path, title="Land Use Classification"):
+    """
+    Save a color-coded PNG visualization of the prediction map.
+    """
+    plt.figure(figsize=(10, 8))
+    plt.imshow(prediction_map, cmap='terrain')
+    plt.colorbar(label='Land Use Class')
+    plt.title(title)
+    plt.savefig(output_path)
+    plt.close()
+    print(f"Visualization saved to: {output_path}")
+
 def visualize_prediction(prediction_map, title="Land Use Classification"):
     """
     Visualize the prediction map.
