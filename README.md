@@ -47,6 +47,7 @@ python main.py --train
 # Specify model type
 python main.py --train --model xgb
 ```
+note that you will have to download OpenMP to use the xgb model
 
 ### Classify a New Image
 This will load a GeoTIFF, use the specified model version, and save a prediction map to `outputs/`.
@@ -65,7 +66,7 @@ python main.py --classify /path/to/your/image.tif --visualize
 ```
 
 > [!TIP]
-> The raw `.tif` outputs in `outputs/` may appear black in standard viewers because they contain raw class indices. Use the `--visualize` flag to generate a colorized `.png` version, or open the `.tif` in a GIS tool like QGIS.
+> The raw `.tif` outputs in `outputs/` may appear black in standard viewers because they contain raw class indices. Use the `--visualize` flag to generate a colorized `.png` version, or open the `.tif` in a GIS tool like QGIS. Also we probably have to fix the way it colorizes, not sure if it's what we want.
 
 ### Run Both
 ```bash
@@ -76,6 +77,3 @@ python main.py --train --classify /path/to/your/image.tif --model xgb --visualiz
 XGBoost is included but optional to avoid dependency issues on macOS. To use it:
 1. Install OpenMP: `brew install libomp`
 2. Run with the `--model xgb` flag.
-
----
-*Created by Antigravity*
