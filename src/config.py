@@ -27,3 +27,21 @@ MODELS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "trained_m
 # Image paths (example)
 TEST_IMAGE_PATH = '/content/drive/MyDrive/DSTestImages/Test_Image_SanDiego.tif'
 MODEL_PKL_PATH = '/content/drive/MyDrive/DSTestImages/landcover_rf_model.pkl'
+
+# ESA WorldCover colors
+ESA_WORLDCOVER_COLORS = [
+    '#006400', # 0: Forest
+    '#ffbb22', # 1: Shrubland
+    '#ffff4c', # 2: Grassland
+    '#f096ff', # 3: Cropland
+    '#fa0000', # 4: Built-up
+    '#b4b4b4', # 5: Bare
+    '#0064ff'  # 6: Water
+]
+
+def get_esa_colormap():
+    """
+    Create a Matplotlib ListedColormap for ESA WorldCover classes.
+    """
+    from matplotlib.colors import ListedColormap
+    return ListedColormap(ESA_WORLDCOVER_COLORS)

@@ -64,7 +64,7 @@ def save_prediction_visual(prediction_map, output_path, title="Land Use Classifi
     Save a color-coded PNG visualization of the prediction map.
     """
     plt.figure(figsize=(10, 8))
-    plt.imshow(prediction_map, cmap='terrain')
+    plt.imshow(prediction_map, cmap=config.get_esa_colormap())
     plt.colorbar(label='Land Use Class')
     plt.title(title)
     plt.savefig(output_path)
@@ -76,7 +76,7 @@ def visualize_prediction(prediction_map, title="Land Use Classification"):
     Visualize the prediction map.
     """
     plt.figure(figsize=(10, 8))
-    plt.imshow(prediction_map, cmap='terrain')
+    plt.imshow(prediction_map, cmap=config.get_esa_colormap())
     plt.colorbar(label='Land Use Class')
     plt.title(title)
     plt.show()
